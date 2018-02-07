@@ -1,0 +1,2 @@
+# ServiceReceiver
+用于模拟接收前端使用http协议传输过来的数据
