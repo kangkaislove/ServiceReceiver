@@ -1,4 +1,4 @@
-package com.example.demo2.beans;
+package com.kk.receiver.beans;
 
 import java.io.Serializable;
 

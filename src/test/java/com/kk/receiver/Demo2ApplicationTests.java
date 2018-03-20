@@ -1,4 +1,4 @@
-package com.example.demo2;
+package com.kk.receiver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

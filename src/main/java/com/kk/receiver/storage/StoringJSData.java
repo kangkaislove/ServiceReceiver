@@ -1,6 +1,6 @@
-package com.example.demo2.storage;
+package com.kk.receiver.storage;
 
-import com.example.demo2.beans.JsData;
+import com.kk.receiver.beans.JsData;
 
 import java.util.ArrayList;
 import java.util.List;

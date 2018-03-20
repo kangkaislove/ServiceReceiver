@@ -1,4 +1,4 @@
-package com.example.demo2.utils;
+package com.kk.receiver.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

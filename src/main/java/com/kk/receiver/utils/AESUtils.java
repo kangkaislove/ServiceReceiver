@@ -1,10 +1,8 @@
-package com.example.demo2.utils;
+package com.kk.receiver.utils;
 
 import java.io.ByteArrayOutputStream;
-import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Vector;
 import java.util.zip.GZIPOutputStream;

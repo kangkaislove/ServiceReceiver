@@ -1,8 +1,8 @@
-package com.example.demo2.web;
+package com.kk.receiver.web;
 
-import com.example.demo2.utils.AESUtils;
-import com.example.demo2.utils.Contants;
-import com.example.demo2.utils.GZIPUtils;
+import com.kk.receiver.utils.AESUtils;
+import com.kk.receiver.utils.Contants;
+import com.kk.receiver.utils.GZIPUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -1,8 +1,8 @@
-package com.example.demo2.web;
+package com.kk.receiver.web;
 
-import com.example.demo2.beans.JsData;
-import com.example.demo2.storage.StoringJSData;
-import com.example.demo2.utils.ImageUtil;
+import com.kk.receiver.beans.JsData;
+import com.kk.receiver.storage.StoringJSData;
+import com.kk.receiver.utils.ImageUtil;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
 
