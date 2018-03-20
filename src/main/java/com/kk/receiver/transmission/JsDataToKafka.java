@@ -1,9 +1,8 @@
-package com.example.demo2.transmission;
+package com.kk.receiver.transmission;
 
-import com.example.demo2.beans.JsData;
-import com.example.demo2.storage.StoringJSData;
-import com.example.demo2.utils.Contants;
-import com.example.demo2.utils.beanUtil;
+import com.kk.receiver.beans.JsData;
+import com.kk.receiver.storage.StoringJSData;
+import com.kk.receiver.utils.Contants;
 import com.google.gson.Gson;
 import org.apache.kafka.clients.producer.*;
 
