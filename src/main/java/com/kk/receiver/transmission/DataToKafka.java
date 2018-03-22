@@ -1,9 +1,9 @@
 package com.kk.receiver.transmission;
 
-import com.kk.receiver.beans.JsData;
+import com.google.gson.Gson;
+import com.kk.receiver.RCVConfig;
 import com.kk.receiver.storage.StoringJSData;
 import com.kk.receiver.utils.Contants;
-import com.google.gson.Gson;
 import org.apache.kafka.clients.producer.*;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * Created by kangkai on 2018/1/31.
  */
-public class JsDataToKafka implements Runnable{
+public class DataToKafka implements Runnable{
 
     @Override
     public void run() {
@@ -21,7 +21,7 @@ public class JsDataToKafka implements Runnable{
             try {
                 Thread.sleep(10000);
                 System.out.println("当前数组的长度:" + StoringJSData.getInstance().getDataLength());
-                if(StoringJSData.getInstance().getDataLength() >= 5){
+                if(StoringJSData.getInstance().getDataLength() >= RCVConfig.BATCH_COUNT){
                     System.out.println("数据准备上传kafka");
                     sendToKafka(StoringJSData.getInstance().getData());
                 }
@@ -31,7 +31,7 @@ public class JsDataToKafka implements Runnable{
         }
     }
 
-    private void sendToKafka(List<JsData> datas){
+    private void sendToKafka(List<String> datas){
 
         Properties props = new Properties();
 
@@ -52,19 +52,16 @@ public class JsDataToKafka implements Runnable{
         //value序列化方式
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        Producer<String,String> producer = new KafkaProducer<String, String>(props);
+        Producer<String,String> producer = new KafkaProducer<>(props);
 
         Gson gson = new Gson();
 
         for (int index = 0; index < datas.size(); index++) {
             final int finalIndex = index;
-            producer.send(new ProducerRecord<String, String>(Contants.topic_name,index+"",gson.toJson(datas.get(index))), new Callback() {
-                @Override
-                public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                    if(finalIndex == datas.size()-1 ){
-                        System.out.println("数据写入kafka成功");
-                        StoringJSData.getInstance().DeleteData();
-                    }
+            producer.send(new ProducerRecord<>(Contants.topic_name,index+"",datas.get(index)), (recordMetadata, e) -> {
+                if(finalIndex == datas.size()-1 ){
+                    System.out.println("数据写入kafka成功");
+                    StoringJSData.getInstance().DeleteData();
                 }
             });
         }

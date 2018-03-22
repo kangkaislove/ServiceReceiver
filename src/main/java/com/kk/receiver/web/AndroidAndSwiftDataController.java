@@ -1,5 +1,6 @@
 package com.kk.receiver.web;
 
+import com.kk.receiver.storage.StoringJSData;
 import com.kk.receiver.utils.AESUtils;
 import com.kk.receiver.utils.Contants;
 import com.kk.receiver.utils.GZIPUtils;
@@ -44,24 +45,20 @@ public class AndroidAndSwiftDataController {
             dataInputStream.readFully(bytes);
             dataInputStream.close();
 
-            try {
+            //先进行AES解密二进制流数据
+            byte[] decryptByte = AESUtils.decrypt(bytes, Contants.secretKey);
+            //再进行GZIP解压
+            byte [] resultByte = GZIPUtils.uncompress(decryptByte);
+            //得到完整的数据
+            String data =new String(resultByte,"UTF-8").trim();
+            //打印输出
+            System.out.println("**************移动端****************");
+            System.out.println("appId is:" + request.getParameter("appId"));
+            System.out.println(data);
+            System.out.println("**************移动端****************");
 
-                //先进行AES解密二进制流数据
-                byte[] decryptByte = AESUtils.decrypt(bytes, Contants.secretKey);
-                //再进行GZIP解压
-                byte [] resultByte = GZIPUtils.uncompress(decryptByte);
-                //打印输出
-                System.out.println("**************移动端****************");
-                System.out.println(new String(resultByte,"UTF-8").trim());
-                System.out.println("**************移动端****************");
-
+            StoringJSData.getInstance().addToList(data);
             } catch (Exception e) {
-
-                e.printStackTrace();
-            }
-
-            } catch (IOException e) {
-
                 e.printStackTrace();
             }
 

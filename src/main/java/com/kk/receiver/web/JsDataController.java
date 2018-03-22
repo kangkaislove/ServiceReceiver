@@ -1,9 +1,7 @@
 package com.kk.receiver.web;
 
-import com.kk.receiver.beans.JsData;
 import com.kk.receiver.storage.StoringJSData;
 import com.kk.receiver.utils.ImageUtil;
-import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,7 @@ public class JsDataController {
     @CrossOrigin(origins = "*")
     @ResponseBody
     private String javaScriptCollector(HttpServletRequest httpServletRequest,
-                          HttpServletResponse httpServletResponse) {
+                                       HttpServletResponse httpServletResponse) {
 
         //处理数据
         dealData(httpServletRequest);
@@ -33,31 +31,26 @@ public class JsDataController {
         return "{\"result\":1}";
     }
 
-    private void dealData(HttpServletRequest request){
+    private void dealData(HttpServletRequest request) {
 
         String logData = "";
 
         //打印get请求url中带过来的参数
         logData = request.getParameter("log");
 
-        System.out.println("**************PC端****************");
+        System.out.println("**************JavaScript****************");
         System.out.println("appId is:" + request.getParameter("appId"));
-        System.out.println("v is:" + request.getParameter("v"));
-        System.out.println("sig is:" + request.getParameter("sig"));
         System.out.println("log is:" + logData);
         System.out.println("**************JavaScript****************");
 
-        if(logData.isEmpty())
+        if (logData.isEmpty())
             return;
-
-        Gson gson = new Gson();
-        JsData data = gson.fromJson(logData, JsData.class);
         //添加到本地数组
-        StoringJSData.getInstance().addToList(data);
+        StoringJSData.getInstance().addToList(logData);
 
     }
 
-    private void notice(HttpServletResponse response){
+    private void notice(HttpServletResponse response) {
 
         // img为图片的二进制流
         byte[] img = ImageUtil.getImageBinary(this.getClass().getResource("/imgs/dog.jpg").getPath());
@@ -70,6 +63,6 @@ public class JsDataController {
             os.close();
         } catch (IOException e) {
             e.printStackTrace();
-      }
+        }
     }
 }
