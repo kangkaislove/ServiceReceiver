@@ -10,5 +10,5 @@ public class Contants {
     public final static String secretKey = "257e963a9be83de0a4373f20dc82bb56";
 
     //网页采集数据对应kafka的TopicName
-    public final static String topic_name = "js_topic";
+    public final static String topic_name = "js_topic2";
 }

@@ -1,8 +1,7 @@
 package com.kk.receiver.transmission;
 
-import com.google.gson.Gson;
 import com.kk.receiver.RCVConfig;
-import com.kk.receiver.storage.StoringJSData;
+import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.Contants;
 import org.apache.kafka.clients.producer.*;
 
@@ -20,10 +19,10 @@ public class DataToKafka implements Runnable{
         while (true){
             try {
                 Thread.sleep(10000);
-                System.out.println("当前数组的长度:" + StoringJSData.getInstance().getDataLength());
-                if(StoringJSData.getInstance().getDataLength() >= RCVConfig.BATCH_COUNT){
+                System.out.println("当前数组的长度:" + CachingData.getInstance().getDataLength());
+                if(CachingData.getInstance().getDataLength() >= RCVConfig.BATCH_COUNT){
                     System.out.println("数据准备上传kafka");
-                    sendToKafka(StoringJSData.getInstance().getData());
+                    sendToKafka(CachingData.getInstance().getData());
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -36,7 +35,7 @@ public class DataToKafka implements Runnable{
         Properties props = new Properties();
 
         //用于建立与 kafka 集群连接的 host/port 组。
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "master:9092,slave1:9092,slave2:9092");
         //需要server接收到数据之后发出的确认接收的信号(值代表需要多少个这样的确认信号)
         props.put("acks", "all");
         //大于0的值将使客户端重新发送任何数据，一旦这些数据发送失败
@@ -54,14 +53,12 @@ public class DataToKafka implements Runnable{
 
         Producer<String,String> producer = new KafkaProducer<>(props);
 
-        Gson gson = new Gson();
-
         for (int index = 0; index < datas.size(); index++) {
             final int finalIndex = index;
             producer.send(new ProducerRecord<>(Contants.topic_name,index+"",datas.get(index)), (recordMetadata, e) -> {
                 if(finalIndex == datas.size()-1 ){
                     System.out.println("数据写入kafka成功");
-                    StoringJSData.getInstance().DeleteData();
+                    CachingData.getInstance().DeleteData();
                 }
             });
         }
