@@ -1,6 +1,6 @@
 package com.kk.receiver.web;
 
-import com.kk.receiver.storage.StoringJSData;
+import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.ImageUtil;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +46,7 @@ public class JsDataController {
         if (logData.isEmpty())
             return;
         //添加到本地数组
-        StoringJSData.getInstance().addToList(logData);
+        CachingData.getInstance().addToList(logData);
 
     }
 

@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 存储网页采集数据至内存中
+ * 缓存数据类
  * Created by kangkai on 2018/1/31.
  */
-public class StoringJSData {
+public class CachingData {
 
-    private static StoringJSData instance;
+    private static CachingData instance;
 
     volatile private static List<String> jsDatas = new ArrayList<>();
 
-    public StoringJSData() {
+    public CachingData() {
 
     }
 
-    public static StoringJSData getInstance() {
+    public static CachingData getInstance() {
         if (instance == null) {
-            synchronized (StoringJSData.class) {
+            synchronized (CachingData.class) {
                 if (instance == null) {
-                    instance = new StoringJSData();
+                    instance = new CachingData();
                 }
             }
         }

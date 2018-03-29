@@ -1,6 +1,6 @@
 package com.kk.receiver.web;
 
-import com.kk.receiver.storage.StoringJSData;
+import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.AESUtils;
 import com.kk.receiver.utils.Contants;
 import com.kk.receiver.utils.GZIPUtils;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.DataInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -57,7 +56,7 @@ public class AndroidAndSwiftDataController {
             System.out.println(data);
             System.out.println("**************移动端****************");
 
-            StoringJSData.getInstance().addToList(data);
+            CachingData.getInstance().addToList(data);
             } catch (Exception e) {
                 e.printStackTrace();
             }
