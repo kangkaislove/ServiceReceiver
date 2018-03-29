@@ -40,7 +40,7 @@ public class JsDataController {
 
         System.out.println("**************JavaScript****************");
         System.out.println("appId is:" + request.getParameter("appId"));
-        System.out.println("log is:" + logData);
+        System.out.println(logData);
         System.out.println("**************JavaScript****************");
 
         if (logData.isEmpty())
