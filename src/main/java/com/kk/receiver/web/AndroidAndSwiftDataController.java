@@ -1,9 +1,11 @@
 package com.kk.receiver.web;
 
+import com.kk.receiver.service.AsyncService;
 import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.AESUtils;
 import com.kk.receiver.utils.Contants;
 import com.kk.receiver.utils.GZIPUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +21,9 @@ import java.io.InputStream;
 
 @RestController
 public class AndroidAndSwiftDataController {
+
+    @Autowired
+    private AsyncService service;
 
     @RequestMapping(value = "/api/stat/rt",method = {RequestMethod.POST})
     @ResponseBody
@@ -56,7 +61,9 @@ public class AndroidAndSwiftDataController {
             System.out.println(data);
             System.out.println("**************移动端****************");
 
-            CachingData.getInstance().addToList(data);
+            //添加到本地缓存中
+            service.executeAsync(data);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

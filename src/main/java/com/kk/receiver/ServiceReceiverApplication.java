@@ -10,7 +10,7 @@ public class ServiceReceiverApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ServiceReceiverApplication.class, args);
 
-		//启动上传数据至kafka的线程
+		//启动监测服务线程
 		new Thread(new DataToKafka()).start();
 	}
 }

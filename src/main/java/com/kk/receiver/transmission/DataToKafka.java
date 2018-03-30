@@ -1,6 +1,6 @@
 package com.kk.receiver.transmission;
 
-import com.kk.receiver.RCVConfig;
+import com.kk.receiver.config.RCVConfig;
 import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.Contants;
 import org.apache.kafka.clients.producer.*;
@@ -18,7 +18,7 @@ public class DataToKafka implements Runnable{
 
         while (true){
             try {
-                Thread.sleep(10000);
+                Thread.sleep(RCVConfig.DETECTION_CYCLE * 1000);
                 System.out.println("当前数组的长度:" + CachingData.getInstance().getDataLength());
                 if(CachingData.getInstance().getDataLength() >= RCVConfig.BATCH_COUNT){
                     System.out.println("数据准备上传kafka");
@@ -35,7 +35,7 @@ public class DataToKafka implements Runnable{
         Properties props = new Properties();
 
         //用于建立与 kafka 集群连接的 host/port 组。
-        props.put("bootstrap.servers", "master:9092,slave1:9092,slave2:9092");
+        props.put("bootstrap.servers", RCVConfig.KAFKA_SERVERS);
         //需要server接收到数据之后发出的确认接收的信号(值代表需要多少个这样的确认信号)
         props.put("acks", "all");
         //大于0的值将使客户端重新发送任何数据，一旦这些数据发送失败

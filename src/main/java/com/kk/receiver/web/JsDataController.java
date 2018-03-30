@@ -1,7 +1,9 @@
 package com.kk.receiver.web;
 
+import com.kk.receiver.service.AsyncService;
 import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.ImageUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,9 @@ import java.io.OutputStream;
 
 @RestController
 public class JsDataController {
+
+    @Autowired
+    private AsyncService service;
 
     @RequestMapping(value = {"/api/stat/rt/js"}, method = {RequestMethod.GET})
     @CrossOrigin(origins = "*")
@@ -45,8 +50,8 @@ public class JsDataController {
 
         if (logData.isEmpty())
             return;
-        //添加到本地数组
-        CachingData.getInstance().addToList(logData);
+        //添加到本地缓存中
+        service.executeAsync(logData);
 
     }
 

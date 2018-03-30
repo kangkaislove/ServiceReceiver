@@ -1,7 +1,6 @@
 package com.kk.receiver.storage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 缓存数据类
@@ -11,7 +10,7 @@ public class CachingData {
 
     private static CachingData instance;
 
-    volatile private static List<String> jsDatas = new ArrayList<>();
+    private static List<String> Data = Collections.synchronizedList(new LinkedList<String>());
 
     public CachingData() {
 
@@ -32,29 +31,33 @@ public class CachingData {
     * 添加数据至数组
     * */
     public void addToList(String data) {
-        jsDatas.add(data);
+        Data.add(data);
     }
 
     /*
     * 获取数组内容
     * */
     public List<String> getData() {
-        return jsDatas;
+      synchronized (Data){
+        return Data;
+      }
     }
 
     /*
     * 清除数组内容
     * */
     public void DeleteData() {
-        if (jsDatas != null && jsDatas.size() > 0) {
-            jsDatas.clear();
+      synchronized (Data){
+        if (!Data.isEmpty()) {
+            Data.clear();
         }
+      }
     }
 
     /*
     * 获取数组的长度
     * */
     public int getDataLength() {
-        return jsDatas.size();
+        return Data.size();
     }
 }
