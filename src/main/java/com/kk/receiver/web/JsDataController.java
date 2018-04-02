@@ -43,10 +43,10 @@ public class JsDataController {
         //打印get请求url中带过来的参数
         logData = request.getParameter("log");
 
-        System.out.println("**************JavaScript****************");
+        System.out.println("**************JavaScript——head****************");
         System.out.println("appId is:" + request.getParameter("appId"));
         System.out.println(logData);
-        System.out.println("**************JavaScript****************");
+        System.out.println("**************JavaScript——foot****************");
 
         if (logData.isEmpty())
             return;

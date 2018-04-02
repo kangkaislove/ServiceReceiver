@@ -20,7 +20,7 @@ public class DataToKafka implements Runnable{
             try {
                 Thread.sleep(RCVConfig.DETECTION_CYCLE * 1000);
                 System.out.println("当前数组的长度:" + CachingData.getInstance().getDataLength());
-                if(CachingData.getInstance().getDataLength() >= RCVConfig.BATCH_COUNT){
+                if(CachingData.getInstance().getDataLength() == RCVConfig.BATCH_COUNT){
                     System.out.println("数据准备上传kafka");
                     sendToKafka(CachingData.getInstance().getData());
                 }
@@ -30,33 +30,11 @@ public class DataToKafka implements Runnable{
         }
     }
 
-    private void sendToKafka(List<String> datas){
-
-        Properties props = new Properties();
-
-        //用于建立与 kafka 集群连接的 host/port 组。
-        props.put("bootstrap.servers", RCVConfig.KAFKA_SERVERS);
-        //需要server接收到数据之后发出的确认接收的信号(值代表需要多少个这样的确认信号)
-        props.put("acks", "all");
-        //大于0的值将使客户端重新发送任何数据，一旦这些数据发送失败
-        props.put("retries", 0);
-        //设置缓冲区的大小
-        props.put("batch.size", 16384);
-        //设置延迟
-        props.put("linger.ms", 1);
-        //可以用来缓存数据的内存大小
-        props.put("buffer.memory", 33554432);
-        //key的序列化方式
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        //value序列化方式
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-
-        Producer<String,String> producer = new KafkaProducer<>(props);
-
-        for (int index = 0; index < datas.size(); index++) {
+    private void sendToKafka(List<String> data){
+        for (int index = 0; index < data.size(); index++) {
             final int finalIndex = index;
-            producer.send(new ProducerRecord<>(Contants.topic_name,index+"",datas.get(index)), (recordMetadata, e) -> {
-                if(finalIndex == datas.size()-1 ){
+            RCVProducer.getInstance().send(new ProducerRecord<>(Contants.topic_name,data.get(index)), (recordMetadata, e) -> {
+                if(finalIndex == data.size()-1 ){
                     System.out.println("数据写入kafka成功");
                     CachingData.getInstance().DeleteData();
                 }
