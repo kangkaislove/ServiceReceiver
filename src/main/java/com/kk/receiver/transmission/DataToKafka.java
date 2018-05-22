@@ -1,20 +1,18 @@
 package com.kk.receiver.transmission;
 
 import com.kk.receiver.config.RCVConfig;
-import com.kk.receiver.storage.CachingData;
-import com.kk.receiver.utils.Contants;
-import org.apache.kafka.clients.producer.*;
-
-import java.util.List;
-import java.util.Properties;
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
 /**
- * Created by kangkai on 2018/1/31.
+ * @author kangkai
+ * @date 2018/1/31
  */
 public class DataToKafka {
 
     public  static void sendToKafka(String data){
-            RCVProducer.getInstance().send(new ProducerRecord<>(Contants.topic_name, data), new Callback() {
+            RCVProducer.getInstance().send(new ProducerRecord<>(RCVConfig.TOPIC_NAME, data), new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
 

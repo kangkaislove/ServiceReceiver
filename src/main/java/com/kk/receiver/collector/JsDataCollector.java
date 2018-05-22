@@ -1,4 +1,4 @@
-package com.kk.receiver.web;
+package com.kk.receiver.collector;
 
 import com.kk.receiver.service.AsyncService;
 import com.kk.receiver.utils.ImageUtil;
@@ -12,11 +12,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * Created by kangkai on 2018/1/26.
+ * 接收网页端的数据
+ * @author kangkai
+ * @date 2018/1/26
  */
 
 @RestController
-public class JsDataController {
+public class JsDataCollector {
 
     @Autowired
     private AsyncService service;
@@ -47,8 +49,9 @@ public class JsDataController {
         System.out.println(logData);
         System.out.println("**************JavaScript——foot****************");
 
-        if (logData.isEmpty())
+        if (logData.isEmpty()){
             return;
+        }
         //添加到本地缓存中
         service.executeAsync(logData);
 

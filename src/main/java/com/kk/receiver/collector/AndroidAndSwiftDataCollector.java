@@ -1,9 +1,8 @@
-package com.kk.receiver.web;
+package com.kk.receiver.collector;
 
+import com.kk.receiver.config.AppSecretKeyConfig;
 import com.kk.receiver.service.AsyncService;
-import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.AESUtils;
-import com.kk.receiver.utils.Contants;
 import com.kk.receiver.utils.GZIPUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,18 +15,20 @@ import java.io.DataInputStream;
 import java.io.InputStream;
 
 /**
- * Created by kangkai on 2018/1/28.
+ * 接收客户端数据
+ * @author kangkai
+ * @date 2018/1/28
  */
 
 @RestController
-public class AndroidAndSwiftDataController {
+public class AndroidAndSwiftDataCollector {
 
     @Autowired
     private AsyncService service;
 
     @RequestMapping(value = "/api/stat/rt",method = {RequestMethod.POST})
     @ResponseBody
-    private String androidCollector(HttpServletRequest request){
+    private String mobileTerminalCollector(HttpServletRequest request){
 
         //处理数据
         dealData(request);
@@ -50,7 +51,7 @@ public class AndroidAndSwiftDataController {
             dataInputStream.close();
 
             //先进行AES解密二进制流数据
-            byte[] decryptByte = AESUtils.decrypt(bytes, Contants.secretKey);
+            byte[] decryptByte = AESUtils.decrypt(bytes, AppSecretKeyConfig.SECRET_KEY);
             //再进行GZIP解压
             byte [] resultByte = GZIPUtils.uncompress(decryptByte);
             //得到完整的数据
