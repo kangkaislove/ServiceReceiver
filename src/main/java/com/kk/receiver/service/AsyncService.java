@@ -6,5 +6,5 @@ package com.kk.receiver.service;
 public interface AsyncService {
 
      /*执行异步任务*/
-     void executeAsync(Object data);
+     void executeAsync(String data);
 }

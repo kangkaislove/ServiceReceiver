@@ -1,5 +1,8 @@
 package com.kk.receiver.storage;
 
+import com.kk.receiver.config.RCVConfig;
+import com.kk.receiver.transmission.DataToKafka;
+
 import java.util.*;
 
 /**
@@ -31,7 +34,7 @@ public class CachingData {
     * 添加数据至数组
     * */
     public void addToList(String data) {
-        Data.add(data);
+         Data.add(data);
     }
 
     /*
@@ -47,7 +50,7 @@ public class CachingData {
     * 清除数组内容
     * */
     public void DeleteData() {
-      synchronized (Data){
+        synchronized (Data){
         if (!Data.isEmpty()) {
             Data.clear();
         }
