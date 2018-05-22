@@ -22,7 +22,6 @@ public class JsDataController {
     private AsyncService service;
 
     @RequestMapping(value = {"/api/stat/rt/js"}, method = {RequestMethod.GET})
-    @CrossOrigin(origins = "*")
     @ResponseBody
     private String javaScriptCollector(HttpServletRequest httpServletRequest,
                                        HttpServletResponse httpServletResponse) {
