@@ -1,7 +1,6 @@
 package com.kk.receiver.web;
 
 import com.kk.receiver.service.AsyncService;
-import com.kk.receiver.storage.CachingData;
 import com.kk.receiver.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
@@ -56,9 +56,9 @@ public class JsDataController {
     }
 
     private void notice(HttpServletResponse response) {
-
+        InputStream stream = getClass().getClassLoader().getResourceAsStream("dog.jpg");
         // img为图片的二进制流
-        byte[] img = ImageUtil.getImageBinary(this.getClass().getResource("/imgs/dog.jpg").getPath());
+        byte[] img = ImageUtil.input2byte(stream);
         response.setContentType("image/jpg");
         OutputStream os = null;
         try {

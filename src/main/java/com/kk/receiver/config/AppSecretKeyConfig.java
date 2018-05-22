@@ -7,5 +7,5 @@ package com.kk.receiver.config;
  */
 public class AppSecretKeyConfig {
 
-    public final static String secretKey_200 = "257e963a9be83de0a4373f20dc82bb56";
+    public final static String secretKey_200 = "6ec3b8b8bed95720416fdf8d985f1ff2";
 }

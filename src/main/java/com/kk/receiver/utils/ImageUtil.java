@@ -5,15 +5,14 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
 import sun.misc.BASE64Encoder;
 
 /**
  * Created by kangkai on 2018/1/26.
  */
 public class ImageUtil {
-
-    static BASE64Encoder encoder = new sun.misc.BASE64Encoder();
-
     /**
      * 将图片转换成二进制
      * @return
@@ -28,6 +27,22 @@ public class ImageUtil {
             byte[] bytes = baos.toByteArray();
 
             return bytes;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static final byte[] input2byte(InputStream inStream) {
+        try {
+            ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
+            byte[] buff = new byte[1024];
+            int rc = 0;
+            while ((rc = inStream.read(buff, 0, 1024)) > 0) {
+                swapStream.write(buff, 0, rc);
+            }
+            byte[] in2b = swapStream.toByteArray();
+            return in2b;
         } catch (IOException e) {
             e.printStackTrace();
         }
