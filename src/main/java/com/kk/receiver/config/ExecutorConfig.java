@@ -10,9 +10,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 
 /**
- * 线程池配置类
- * @author kangkai
- * @date 2018/3/29
+ * @Description : 异步线程池配置类
+ * @Author : k.k
+ * @Data : 2019/2/20
  */
 
 @Configuration
@@ -24,11 +24,13 @@ public class ExecutorConfig {
 
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //设置核心线程数
-        executor.setCorePoolSize(4);
+        executor.setCorePoolSize(16);
         //设置最大允许线程数
-        executor.setMaxPoolSize(10);
+        executor.setMaxPoolSize(20);
         //配置队列大小
         executor.setQueueCapacity(100000);
+        //配置线程池中的线程的名称前缀
+        executor.setThreadNamePrefix("async-kafkaProducer-service");
         //当pool已经达到max size的时候，不在新线程中执行任务，而是有调用者所在的线程来执行
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         //执行初始化

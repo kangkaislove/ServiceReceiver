@@ -1,10 +1,11 @@
 package com.kk.receiver.config;
 
 /**
- * Created in 2018/3/30
- * author:k.k
- * function:AppSecretKey列表配置类(ES解密秘钥)
+ * @Description : AppSecretKey列表配置类(AES解密秘钥)
+ * @Author : k.k
+ * @Data : 2019/2/20
  */
+
 public class AppSecretKeyConfig {
 
     /**AES解密秘钥*/

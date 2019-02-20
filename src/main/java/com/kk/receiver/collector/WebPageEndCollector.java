@@ -12,20 +12,20 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * 接收网页端的数据
- * @author kangkai
- * @date 2018/1/26
+ * @Description : 网页端数据接收处理
+ * @Author : k.k
+ * @Data : 2019/2/20
  */
 
 @RestController
-public class JsDataCollector {
+public class WebPageEndCollector {
 
     @Autowired
     private AsyncService service;
 
     @RequestMapping(value = {"/api/stat/rt/js"}, method = {RequestMethod.GET})
     @ResponseBody
-    private String javaScriptCollector(HttpServletRequest httpServletRequest,
+    private String WebPageEndReceiver(HttpServletRequest httpServletRequest,
                                        HttpServletResponse httpServletResponse) {
 
         //处理数据

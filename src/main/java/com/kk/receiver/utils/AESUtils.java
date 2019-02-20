@@ -9,14 +9,13 @@ import java.util.zip.GZIPOutputStream;
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 
+
 /**
- * <p>
- * AES加密解密工具包
- * </p>
- *
- * @date 2012-5-18
- * @version 1.0
+ * @Description : AES加密解密工具包
+ * @Author : k.k
+ * @Data : 2019/2/20
  */
+
 public class AESUtils {
 
     private static final String ALGORITHM = "AES";
@@ -112,14 +111,12 @@ public class AESUtils {
     }
 
     /**
-     * <p>
      * 加密
-     * </p>
      *
      * @param data
      * @param key
+     ** @throws Exception
      * @return
-     * @throws Exception
      */
     private static byte[] encrypt(byte[] data, byte[] key) throws Exception {
         Key k = toKey(key);
@@ -131,13 +128,11 @@ public class AESUtils {
     }
 
     /**
-     * <p>
      * 转换密钥
-     * </p>
      *
      * @param key
-     * @return
      * @throws Exception
+     * @return
      */
     private static Key toKey(byte[] key) throws Exception {
         SecretKey secretKey = new SecretKeySpec(key, ALGORITHM);
@@ -163,9 +158,11 @@ public class AESUtils {
         return hexDigits[d1] + hexDigits[d2];
     }
 
-    /**解密
+    /**
+     * 解密
+     *
      * @param content  待解密内容
-     * @param key 解密密钥
+     * @param secretKey 解密密钥
      * @return
      */
     public static byte[] decrypt(byte[] content, String secretKey) throws Exception{

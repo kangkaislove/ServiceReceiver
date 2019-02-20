@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 
 /**
- * Created by kangkai on 2018/1/29.
+ * @Description : 压缩工具类
+ * @Author : k.k
+ * @Data : 2019/2/20
  */
+
 public class GZIPUtils {
 
     /*

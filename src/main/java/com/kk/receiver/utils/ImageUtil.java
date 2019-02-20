@@ -7,11 +7,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import sun.misc.BASE64Encoder;
-
 /**
- * Created by kangkai on 2018/1/26.
+ * @Description : 图片工具类
+ * @Author : k.k
+ * @Data : 2019/2/20
  */
+
 public class ImageUtil {
     /**
      * 将图片转换成二进制

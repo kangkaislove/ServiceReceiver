@@ -15,20 +15,20 @@ import java.io.DataInputStream;
 import java.io.InputStream;
 
 /**
- * 接收客户端数据
- * @author kangkai
- * @date 2018/1/28
+ * @Description : 客户端数据接收处理
+ * @Author : k.k
+ * @Data : 2019/2/20
  */
 
 @RestController
-public class AndroidAndSwiftDataCollector {
+public class MobileTerminalCollector {
 
     @Autowired
     private AsyncService service;
 
     @RequestMapping(value = "/api/stat/rt",method = {RequestMethod.POST})
     @ResponseBody
-    private String mobileTerminalCollector(HttpServletRequest request){
+    private String mobileTerminalReceiver(HttpServletRequest request){
 
         //处理数据
         dealData(request);
@@ -57,10 +57,10 @@ public class AndroidAndSwiftDataCollector {
             //得到完整的数据
             String data =new String(resultByte,"UTF-8").trim();
             //打印输出
-            System.out.println("**************移动端****************");
+          /*  System.out.println("**************移动端****************");
             System.out.println("appId is:" + request.getParameter("appId"));
             System.out.println(data);
-            System.out.println("**************移动端****************");
+            System.out.println("**************移动端****************");*/
 
             //添加到本地缓存中
             service.executeAsync(data);
