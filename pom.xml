@@ -42,16 +42,29 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--kafka-->
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka-clients</artifactId>
 			<version>0.11.0.3</version>
 		</dependency>
 
+		<!--日志-->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<finalName>ServiceReceiver-1.0.0</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -59,24 +72,10 @@
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
 					<include>**/*.jpg</include>
+					<include>**/*.yml</include>
 				</includes>
 				<filtering>false</filtering>
 			</resource>
 		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<executable>true</executable>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>spring-milestone</id>
-			<url>http://repo.spring.io/libs-release</url>
-		</repository>
-	</repositories>
 </project>
