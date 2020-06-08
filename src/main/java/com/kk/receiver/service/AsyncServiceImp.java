@@ -16,6 +16,6 @@ public class AsyncServiceImp implements AsyncService{
     @Override
     @Async("asyncServiceExecutor")
     public void executeAsync(String data) {
-        DataToKafka.sendToKafka(data);
+//        DataToKafka.sendToKafka(data);
     }
 }

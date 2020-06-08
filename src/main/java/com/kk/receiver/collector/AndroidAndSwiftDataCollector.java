@@ -44,12 +44,14 @@ public class AndroidAndSwiftDataCollector {
         try {
 
             int totalBytes = request.getContentLength();
+            System.out.println("数据的长度:" + totalBytes);
             is = request.getInputStream();
             DataInputStream dataInputStream = new DataInputStream(is);
             byte[] bytes = new byte[totalBytes];
             dataInputStream.readFully(bytes);
             dataInputStream.close();
 
+            System.out.println("appId is:" + request.getParameter("appId"));
             //先进行AES解密二进制流数据
             byte[] decryptByte = AESUtils.decrypt(bytes, AppSecretKeyConfig.SECRET_KEY);
             //再进行GZIP解压
@@ -58,7 +60,6 @@ public class AndroidAndSwiftDataCollector {
             String data =new String(resultByte,"UTF-8").trim();
             //打印输出
             System.out.println("**************移动端****************");
-            System.out.println("appId is:" + request.getParameter("appId"));
             System.out.println(data);
             System.out.println("**************移动端****************");
 

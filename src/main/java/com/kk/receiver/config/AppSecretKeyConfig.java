@@ -8,5 +8,5 @@ package com.kk.receiver.config;
 public class AppSecretKeyConfig {
 
     /**AES解密秘钥*/
-    public final static String SECRET_KEY = "6ec3b8b8bed95720416fdf8d985f1ff2";
+    public final static String SECRET_KEY = "993bab9631cbe83ffa486e2c864fe4bd";
 }
