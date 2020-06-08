@@ -1,0 +1,10 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+
+server:
+  port: 8081
+
+logback:
+  logdir: D:\\softwares\\IDEA\\IdeaProjects\\ServiceReceiver\\logs
