@@ -44,7 +44,7 @@ public class MobileTerminalCollector {
         try {
 
             int totalBytes = request.getContentLength();
-            System.out.println("数据的长度:" + totalBytes);
+//            System.out.println("数据的长度:" + totalBytes);
             is = request.getInputStream();
             DataInputStream dataInputStream = new DataInputStream(is);
             byte[] bytes = new byte[totalBytes];
