@@ -59,14 +59,10 @@ public class MobileTerminalCollector {
             //得到完整的数据
             String data =new String(resultByte,"UTF-8").trim();
             //打印输出
-<<<<<<< HEAD:src/main/java/com/kk/receiver/collector/AndroidAndSwiftDataCollector.java
             System.out.println("**************移动端****************");
-=======
-          /*  System.out.println("**************移动端****************");
             System.out.println("appId is:" + request.getParameter("appId"));
->>>>>>> 410c59cb258270223a337b02f4e9b94f4c1fe86e:src/main/java/com/kk/receiver/collector/MobileTerminalCollector.java
             System.out.println(data);
-            System.out.println("**************移动端****************");*/
+            System.out.println("**************移动端****************");
 
             //添加到本地缓存中
             service.executeAsync(data);
